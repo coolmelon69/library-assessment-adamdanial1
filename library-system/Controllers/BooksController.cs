@@ -11,13 +11,16 @@ namespace library_system.Controllers
     {
         private readonly IBookQueryService _bookQueryService;
         private readonly IBookCommandService _bookCommandService;
+        private readonly ILoanService _loanService;
 
         public BooksController(
             IBookQueryService bookQueryService,
-            IBookCommandService bookCommandService)
+            IBookCommandService bookCommandService,
+            ILoanService loanService)
         {
             _bookQueryService = bookQueryService;
             _bookCommandService = bookCommandService;
+            _loanService = loanService;
         }
 
         [HttpGet]
@@ -63,6 +66,25 @@ namespace library_system.Controllers
                 nameof(GetBook),
                 new { id = result.Book!.Id },
                 result.Book);
+        }
+
+        [Authorize]
+        [HttpPost("{bookId:int}/borrow")]
+        public async Task<ActionResult<LoanResponse>> BorrowBook(
+            int bookId,
+            CancellationToken cancellationToken)
+        {
+            var result = await _loanService.BorrowBookAsync(bookId, User, cancellationToken);
+
+            return result.Status switch
+            {
+                BorrowBookStatus.Succeeded => Created($"/loans/{result.Loan!.Id}", result.Loan),
+                BorrowBookStatus.BookNotFound => NotFound(new { message = result.ErrorMessage }),
+                BorrowBookStatus.MissingMemberClaims => BadRequest(new { message = result.ErrorMessage }),
+                BorrowBookStatus.NoCopiesAvailable => Conflict(new { message = result.ErrorMessage }),
+                BorrowBookStatus.ActiveLoanLimitReached => Conflict(new { message = result.ErrorMessage }),
+                _ => BadRequest(new { message = "The borrow request could not be completed." })
+            };
         }
     }
 }

@@ -14,6 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IBookQueryService, BookQueryService>();
 builder.Services.AddScoped<IBookCommandService, BookCommandService>();
 builder.Services.AddScoped<IMemberProvisioningService, MemberProvisioningService>();
+builder.Services.AddScoped<ILoanService, LoanService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

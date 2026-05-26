@@ -116,17 +116,17 @@ Goal: implement borrowing and its business rules.
 
 Tasks:
 
-- [ ] Add loan service.
-- [ ] Add protected `POST /books/{bookId}/borrow`.
-- [ ] Resolve current member from token claims.
-- [ ] Reject missing book.
-- [ ] Reject borrowing when no copies are available.
-- [ ] Reject borrowing when member has 3 active loans.
-- [ ] Create active loan with borrowed date.
+- [x] Add loan service.
+- [x] Add protected `POST /books/{bookId}/borrow`.
+- [x] Resolve current member from token claims.
+- [x] Reject missing book.
+- [x] Reject borrowing when no copies are available.
+- [x] Reject borrowing when member has 3 active loans.
+- [x] Create active loan with borrowed date.
 
 Acceptance Check:
 
-- [ ] Missing token returns `401 Unauthorized`.
+- [x] Missing token returns `401 Unauthorized`.
 - [ ] Unknown book returns `404 Not Found`.
 - [ ] No available copies returns a meaningful error.
 - [ ] Three active loans blocks borrowing.
