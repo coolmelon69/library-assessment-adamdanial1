@@ -48,21 +48,21 @@ Goal: implement public book listing and detail retrieval.
 
 Tasks:
 
-- [ ] Add book query service.
-- [ ] Add public `GET /books`.
-- [ ] Add optional title filter.
-- [ ] Add optional author filter.
-- [ ] Add public `GET /books/{id}`.
-- [ ] Include available copy count in book detail.
-- [ ] Return `404 Not Found` for missing book.
+- [x] Add book query service.
+- [x] Add public `GET /books`.
+- [x] Add optional title filter.
+- [x] Add optional author filter.
+- [x] Add public `GET /books/{id}`.
+- [x] Include available copy count in book detail.
+- [x] Return `404 Not Found` for missing book.
 
 Acceptance Check:
 
-- [ ] `GET /books` works without authentication.
-- [ ] Title filtering works as a case-insensitive partial match.
-- [ ] Author filtering works as a case-insensitive partial match.
-- [ ] `GET /books/{id}` includes available copies.
-- [ ] Missing book returns `404`.
+- [x] `GET /books` works without authentication.
+- [x] Title filtering works as a case-insensitive partial match.
+- [x] Author filtering works as a case-insensitive partial match.
+- [x] `GET /books/{id}` includes available copies.
+- [x] Missing book returns `404`.
 
 ## Phase 3: Book Create Feature
 
