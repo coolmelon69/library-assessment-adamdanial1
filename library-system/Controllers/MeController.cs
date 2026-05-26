@@ -11,10 +11,14 @@ namespace library_system.Controllers
     public class MeController : ControllerBase
     {
         private readonly IMemberProvisioningService _memberProvisioningService;
+        private readonly ILoanService _loanService;
 
-        public MeController(IMemberProvisioningService memberProvisioningService)
+        public MeController(
+            IMemberProvisioningService memberProvisioningService,
+            ILoanService loanService)
         {
             _memberProvisioningService = memberProvisioningService;
+            _loanService = loanService;
         }
 
         [HttpGet]
@@ -28,6 +32,14 @@ namespace library_system.Controllers
             }
 
             return Ok(result.Member);
+        }
+
+        [HttpGet("loans")]
+        public async Task<ActionResult<IReadOnlyList<LoanResponse>>> GetMyActiveLoans(CancellationToken cancellationToken)
+        {
+            var loans = await _loanService.GetActiveLoansForCurrentMemberAsync(User, cancellationToken);
+
+            return Ok(loans);
         }
     }
 }

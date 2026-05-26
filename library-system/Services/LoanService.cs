@@ -84,5 +84,81 @@ namespace library_system.Services
                 loan.BorrowedDate,
                 loan.ReturnedDate));
         }
+
+        public async Task<IReadOnlyList<LoanResponse>> GetActiveLoansForCurrentMemberAsync(
+            ClaimsPrincipal user,
+            CancellationToken cancellationToken = default)
+        {
+            var memberResult = await _memberProvisioningService.GetOrProvisionMemberAsync(user, cancellationToken);
+            if (!memberResult.Succeeded || memberResult.Member is null)
+            {
+                return Array.Empty<LoanResponse>();
+            }
+
+            return await _context.Loans
+                .AsNoTracking()
+                .Where(loan => loan.MemberId == memberResult.Member.Id && loan.ReturnedDate == null)
+                .OrderByDescending(loan => loan.BorrowedDate)
+                .Select(loan => new LoanResponse(
+                    loan.Id,
+                    loan.BookId,
+                    loan.Book.Title,
+                    loan.Book.Author,
+                    loan.MemberId,
+                    loan.BorrowedDate,
+                    loan.ReturnedDate))
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<ReturnLoanResult> ReturnLoanAsync(
+            int loanId,
+            ClaimsPrincipal user,
+            CancellationToken cancellationToken = default)
+        {
+            var memberResult = await _memberProvisioningService.GetOrProvisionMemberAsync(user, cancellationToken);
+            if (!memberResult.Succeeded || memberResult.Member is null)
+            {
+                return ReturnLoanResult.Failure(
+                    ReturnLoanStatus.MissingMemberClaims,
+                    memberResult.ErrorMessage ?? "Authenticated member could not be resolved.");
+            }
+
+            var loan = await _context.Loans
+                .Include(existingLoan => existingLoan.Book)
+                .SingleOrDefaultAsync(existingLoan => existingLoan.Id == loanId, cancellationToken);
+
+            if (loan is null)
+            {
+                return ReturnLoanResult.Failure(
+                    ReturnLoanStatus.LoanNotFound,
+                    $"Loan with ID {loanId} was not found.");
+            }
+
+            if (loan.MemberId != memberResult.Member.Id)
+            {
+                return ReturnLoanResult.Failure(
+                    ReturnLoanStatus.Forbidden,
+                    "Members can only return their own loans.");
+            }
+
+            if (loan.ReturnedDate is not null)
+            {
+                return ReturnLoanResult.Failure(
+                    ReturnLoanStatus.AlreadyReturned,
+                    "This loan has already been returned.");
+            }
+
+            loan.ReturnedDate = DateTime.UtcNow;
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return ReturnLoanResult.Success(new LoanResponse(
+                loan.Id,
+                loan.BookId,
+                loan.Book.Title,
+                loan.Book.Author,
+                loan.MemberId,
+                loan.BorrowedDate,
+                loan.ReturnedDate));
+        }
     }
 }

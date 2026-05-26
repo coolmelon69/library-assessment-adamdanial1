@@ -138,18 +138,18 @@ Goal: expose active loans for the authenticated member.
 
 Tasks:
 
-- [ ] Add protected `GET /me/loans`.
-- [ ] Resolve current member from token claims.
-- [ ] Return only active loans.
-- [ ] Include useful book details in each loan item.
-- [ ] Exclude other members' loans.
+- [x] Add protected `GET /me/loans`.
+- [x] Resolve current member from token claims.
+- [x] Return only active loans.
+- [x] Include useful book details in each loan item.
+- [x] Exclude other members' loans.
 
 Acceptance Check:
 
-- [ ] Missing token returns `401 Unauthorized`.
-- [ ] Returned loans are excluded.
-- [ ] Other members' loans are excluded.
-- [ ] Active loans for the current member are returned.
+- [x] Missing token returns `401 Unauthorized`.
+- [x] Returned loans are excluded.
+- [x] Other members' loans are excluded.
+- [x] Active loans for the current member are returned.
 
 ## Phase 7: Return Loan
 
@@ -157,12 +157,12 @@ Goal: implement return flow and ownership protection.
 
 Tasks:
 
-- [ ] Add protected `POST /loans/{loanId}/return`.
-- [ ] Resolve current member from token claims.
-- [ ] Return `404 Not Found` if loan does not exist.
-- [ ] Return `403 Forbidden` if loan belongs to another member.
-- [ ] Handle already returned loans clearly.
-- [ ] Set `ReturnedDate` for successful returns.
+- [x] Add protected `POST /loans/{loanId}/return`.
+- [x] Resolve current member from token claims.
+- [x] Return `404 Not Found` if loan does not exist.
+- [x] Return `403 Forbidden` if loan belongs to another member.
+- [x] Handle already returned loans clearly.
+- [x] Set `ReturnedDate` for successful returns.
 
 Acceptance Check:
 
