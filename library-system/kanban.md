@@ -94,18 +94,18 @@ Goal: satisfy Google-token-based member provisioning.
 
 Tasks:
 
-- [ ] Add member provisioning service.
-- [ ] Read `sub` claim from current token.
-- [ ] Read `name` claim from current token.
-- [ ] Read `email` claim from current token.
-- [ ] Create member on first authenticated request.
-- [ ] Reuse existing member on later requests with the same `sub`.
-- [ ] Add protected `GET /me`.
-- [ ] Ensure member identity is never accepted from request body or URL.
+- [x] Add member provisioning service.
+- [x] Read `sub` claim from current token.
+- [x] Read `name` claim from current token.
+- [x] Read `email` claim from current token.
+- [x] Create member on first authenticated request.
+- [x] Reuse existing member on later requests with the same `sub`.
+- [x] Add protected `GET /me`.
+- [x] Ensure member identity is never accepted from request body or URL.
 
 Acceptance Check:
 
-- [ ] Missing token returns `401 Unauthorized`.
+- [x] Missing token returns `401 Unauthorized`.
 - [ ] First valid token provisions a member.
 - [ ] Same Google `sub` returns the existing member.
 - [ ] `/me` returns current member profile.
