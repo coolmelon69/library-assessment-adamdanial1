@@ -1,0 +1,45 @@
+## Project-local Visual Studio / .NET ignores
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+artifacts/
+
+# User-specific Visual Studio files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.cache
+
+# Test output and coverage
+[Tt]est[Rr]esult*/
+coverage*.json
+coverage*.xml
+coverage*.info
+*.coverage
+*.coveragexml
+
+# Packages and generated files
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+
+# SQL Server local database files
+*.mdf
+*.ldf
+*.ndf
+
+# Secrets and local environment overrides
+*.pfx
+*.publishsettings
+appsettings.Local.json
