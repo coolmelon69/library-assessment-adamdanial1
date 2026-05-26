@@ -362,5 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /library-system/Software Developer - Coding Assessment Guidance.pdf
-/library-system/prd.md
-/library-system/kanban.md
+/library-system/README.md
