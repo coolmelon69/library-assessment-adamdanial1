@@ -8,28 +8,69 @@
     <a asp-controller="Catalog" asp-action="Index">Back to catalog</a>
 </nav>
 
-<section class="book-detail">
-    <div>
-        <p class="text-muted mb-2">@Model.Book.Author</p>
-        <h1>@Model.Book.Title</h1>
+@if (TempData["CatalogSuccessMessage"] is string successMessage)
+{
+    <div class="alert alert-success" role="alert">@successMessage</div>
+}
+
+@if (TempData["CatalogErrorMessage"] is string errorMessage)
+{
+    <div class="alert alert-warning" role="alert">@errorMessage</div>
+}
+
+<section class="book-detail-shell">
+    <div class="book-detail">
+        <div>
+            <p class="text-muted mb-2">@Model.Book.Author</p>
+            <h1>@Model.Book.Title</h1>
+        </div>
+
+        <dl class="book-detail-grid">
+            <div>
+                <dt>ISBN</dt>
+                <dd>@Model.Book.ISBN</dd>
+            </div>
+            <div>
+                <dt>Published</dt>
+                <dd>@Model.Book.PublishedYear</dd>
+            </div>
+            <div>
+                <dt>Total copies</dt>
+                <dd>@Model.Book.TotalCopies</dd>
+            </div>
+            <div>
+                <dt>Available copies</dt>
+                <dd>@Model.Book.AvailableCopies</dd>
+            </div>
+        </dl>
     </div>
 
-    <dl class="book-detail-grid">
-        <div>
-            <dt>ISBN</dt>
-            <dd>@Model.Book.ISBN</dd>
-        </div>
-        <div>
-            <dt>Published</dt>
-            <dd>@Model.Book.PublishedYear</dd>
-        </div>
-        <div>
-            <dt>Total copies</dt>
-            <dd>@Model.Book.TotalCopies</dd>
-        </div>
-        <div>
-            <dt>Available copies</dt>
-            <dd>@Model.Book.AvailableCopies</dd>
-        </div>
-    </dl>
+    <aside class="book-borrow-panel" aria-label="Borrow this book">
+        <p class="borrow-eyebrow">Borrowing</p>
+        <h2>Loan this title</h2>
+        <p>
+            @Model.Book.AvailableCopies available out of @Model.Book.TotalCopies total
+            cop@(Model.Book.TotalCopies == 1 ? "y" : "ies").
+        </p>
+
+        @if (User.Identity?.IsAuthenticated != true)
+        {
+            <a class="btn btn-primary w-100"
+               asp-controller="Auth"
+               asp-action="SignIn"
+               asp-route-returnUrl="@(Context.Request.Path + Context.Request.QueryString)">
+                Sign in with Google to borrow
+            </a>
+        }
+        else if (Model.Book.AvailableCopies > 0)
+        {
+            <form asp-controller="Catalog" asp-action="Borrow" asp-route-id="@Model.Book.Id" method="post">
+                <button type="submit" class="btn btn-primary w-100">Borrow this book</button>
+            </form>
+        }
+        else
+        {
+            <button type="button" class="btn btn-outline-secondary w-100" disabled>No copies available</button>
+        }
+    </aside>
 </section>

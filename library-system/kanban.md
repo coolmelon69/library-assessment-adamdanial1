@@ -197,26 +197,26 @@ Goal: complete Part B SQL deliverables.
 
 Tasks:
 
-- [ ] Add `/sql/schema.sql`.
-- [ ] Add `/sql/seed.sql`.
-- [ ] Add `/sql/queries.sql`.
-- [ ] Include primary keys.
-- [ ] Include foreign keys.
-- [ ] Include indexes.
-- [ ] Include constraints.
-- [ ] Add SQL comments explaining index choices.
-- [ ] Add at least 10 books.
-- [ ] Add at least 5 members.
-- [ ] Add at least 10 loans.
-- [ ] Include active and returned loans.
-- [ ] Add all 5 required assessment queries.
+- [x] Add `/sql/schema.sql`.
+- [x] Add `/sql/seed.sql`.
+- [x] Add `/sql/queries.sql`.
+- [x] Include primary keys.
+- [x] Include foreign keys.
+- [x] Include indexes.
+- [x] Include constraints.
+- [x] Add SQL comments explaining index choices.
+- [x] Add at least 10 books.
+- [x] Add at least 5 members.
+- [x] Add at least 10 loans.
+- [x] Include active and returned loans.
+- [x] Add all 5 required assessment queries.
 
 Acceptance Check:
 
-- [ ] `schema.sql` runs on SQL Server 2019 or later.
-- [ ] `seed.sql` inserts required sample data.
-- [ ] `queries.sql` contains all required queries.
-- [ ] Queries correctly distinguish active and returned loans.
+- [x] `schema.sql` runs on SQL Server 2019 or later.
+- [x] `seed.sql` inserts required sample data.
+- [x] `queries.sql` contains all required queries.
+- [x] Queries correctly distinguish active and returned loans.
 
 ## Phase 10: Unit Tests
 
