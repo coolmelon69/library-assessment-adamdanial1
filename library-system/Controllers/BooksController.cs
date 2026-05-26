@@ -1,5 +1,6 @@
 using library_system.Dtos;
 using library_system.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace library_system.Controllers
@@ -9,10 +10,14 @@ namespace library_system.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookQueryService _bookQueryService;
+        private readonly IBookCommandService _bookCommandService;
 
-        public BooksController(IBookQueryService bookQueryService)
+        public BooksController(
+            IBookQueryService bookQueryService,
+            IBookCommandService bookCommandService)
         {
             _bookQueryService = bookQueryService;
+            _bookCommandService = bookCommandService;
         }
 
         [HttpGet]
@@ -39,6 +44,25 @@ namespace library_system.Controllers
             }
 
             return Ok(book);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult<BookDetailsResponse>> CreateBook(
+            CreateBookRequest request,
+            CancellationToken cancellationToken)
+        {
+            var result = await _bookCommandService.CreateBookAsync(request, cancellationToken);
+
+            if (!result.Succeeded)
+            {
+                return Conflict(new { message = result.ErrorMessage });
+            }
+
+            return CreatedAtAction(
+                nameof(GetBook),
+                new { id = result.Book!.Id },
+                result.Book);
         }
     }
 }

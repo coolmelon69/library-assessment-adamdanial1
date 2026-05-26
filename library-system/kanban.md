@@ -70,23 +70,23 @@ Goal: add protected book creation.
 
 Tasks:
 
-- [ ] Configure Google bearer token authentication.
-- [ ] Add `Authentication:Google:ClientId` placeholder.
-- [ ] Add authenticated `POST /books`.
-- [ ] Validate title.
-- [ ] Validate author.
-- [ ] Validate ISBN.
-- [ ] Validate published year.
-- [ ] Validate total copies.
-- [ ] Return `201 Created` on success.
-- [ ] Return validation errors for invalid payloads.
+- [x] Configure Google bearer token authentication.
+- [x] Add `Authentication:Google:ClientId` placeholder.
+- [x] Add authenticated `POST /books`.
+- [x] Validate title.
+- [x] Validate author.
+- [x] Validate ISBN.
+- [x] Validate published year.
+- [x] Validate total copies.
+- [x] Return `201 Created` on success.
+- [x] Return validation errors for invalid payloads.
 
 Acceptance Check:
 
-- [ ] Missing token returns `401 Unauthorized`.
-- [ ] Invalid token returns `401 Unauthorized`.
+- [x] Missing token returns `401 Unauthorized`.
+- [x] Invalid token returns `401 Unauthorized`.
 - [ ] Valid token can create a book.
-- [ ] Invalid payload returns `400 Bad Request`.
+- [x] Invalid payload returns `400 Bad Request`.
 
 ## Phase 4: Member Provisioning And `/me`
 
