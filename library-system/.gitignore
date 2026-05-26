@@ -6,6 +6,7 @@
 [Dd]ebug/
 [Rr]elease/
 artifacts/
+.phase*-build/
 
 # User-specific Visual Studio files
 *.user

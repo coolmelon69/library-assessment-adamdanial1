@@ -178,18 +178,18 @@ Goal: make the one-tier app easier to inspect manually.
 
 Tasks:
 
-- [ ] Add book list/filter Razor page or MVC view.
-- [ ] Add book detail Razor page or MVC view.
-- [ ] Add create book form if practical with the chosen auth flow.
-- [ ] Keep all UI inside the same ASP.NET Core project.
-- [ ] Keep API endpoints as the assessment source of truth.
+- [x] Add book list/filter Razor page or MVC view.
+- [x] Add book detail Razor page or MVC view.
+- [x] Keep create book as API-only because the chosen auth flow uses bearer tokens.
+- [x] Keep all UI inside the same ASP.NET Core project.
+- [x] Keep API endpoints as the assessment source of truth.
 
 Acceptance Check:
 
-- [ ] App opens cleanly in Visual Studio.
-- [ ] Public book pages work.
-- [ ] No separate frontend project exists.
-- [ ] Auth-required actions remain protected.
+- [x] App opens cleanly in Visual Studio.
+- [x] Public book pages work.
+- [x] No separate frontend project exists.
+- [x] Auth-required actions remain protected.
 
 ## Phase 9: SQL Deliverables
 

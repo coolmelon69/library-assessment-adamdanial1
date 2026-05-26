@@ -1,0 +1,35 @@
+@model CatalogDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.Book.Title;
+}
+
+<nav class="mb-3">
+    <a asp-controller="Catalog" asp-action="Index">Back to catalog</a>
+</nav>
+
+<section class="book-detail">
+    <div>
+        <p class="text-muted mb-2">@Model.Book.Author</p>
+        <h1>@Model.Book.Title</h1>
+    </div>
+
+    <dl class="book-detail-grid">
+        <div>
+            <dt>ISBN</dt>
+            <dd>@Model.Book.ISBN</dd>
+        </div>
+        <div>
+            <dt>Published</dt>
+            <dd>@Model.Book.PublishedYear</dd>
+        </div>
+        <div>
+            <dt>Total copies</dt>
+            <dd>@Model.Book.TotalCopies</dd>
+        </div>
+        <div>
+            <dt>Available copies</dt>
+            <dd>@Model.Book.AvailableCopies</dd>
+        </div>
+    </dl>
+</section>

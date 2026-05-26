@@ -1,5 +1,6 @@
 using library_system.Dtos;
 using library_system.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,7 +50,7 @@ namespace library_system.Controllers
             return Ok(book);
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<ActionResult<BookDetailsResponse>> CreateBook(
             CreateBookRequest request,
@@ -68,7 +69,7 @@ namespace library_system.Controllers
                 result.Book);
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("{bookId:int}/borrow")]
         public async Task<ActionResult<LoanResponse>> BorrowBook(
             int bookId,

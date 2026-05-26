@@ -1,0 +1,65 @@
+@model CatalogIndexViewModel
+
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+<section class="catalog-header">
+    <div>
+        <h1>Library Catalog</h1>
+        <p class="text-muted mb-0">@Model.Books.Count book@(Model.Books.Count == 1 ? "" : "s") found</p>
+    </div>
+</section>
+
+<form method="get" asp-controller="Catalog" asp-action="Index" class="catalog-filter row g-3 align-items-end">
+    <div class="col-12 col-md-5">
+        <label asp-for="Title" class="form-label">Title</label>
+        <input asp-for="Title" class="form-control" autocomplete="off" />
+    </div>
+    <div class="col-12 col-md-5">
+        <label asp-for="Author" class="form-label">Author</label>
+        <input asp-for="Author" class="form-control" autocomplete="off" />
+    </div>
+    <div class="col-12 col-md-2 d-grid">
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+</form>
+
+@if (Model.Books.Count == 0)
+{
+    <div class="catalog-empty">
+        No books match the current filters.
+    </div>
+}
+else
+{
+    <div class="table-responsive catalog-table">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Copies</th>
+                    <th scope="col">Available</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var book in Model.Books)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Catalog" asp-action="Details" asp-route-id="@book.Id">@book.Title</a>
+                    </td>
+                    <td>@book.Author</td>
+                    <td><span class="text-nowrap">@book.ISBN</span></td>
+                    <td>@book.PublishedYear</td>
+                    <td>@book.TotalCopies</td>
+                    <td>@book.AvailableCopies</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
