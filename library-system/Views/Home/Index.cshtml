@@ -2,8 +2,114 @@
     ViewData["Title"] = "Home";
 }
 
-<section class="home-panel">
-    <h1>Library System</h1>
-    <p class="text-muted">Community library books, availability, and borrowing records.</p>
-    <a class="btn btn-primary" asp-controller="Catalog" asp-action="Index">Open catalog</a>
+<section class="landing-hero">
+    <div class="landing-hero-content">
+        <p class="landing-eyebrow">Software Developer Coding Assessment</p>
+        <h1>Library System</h1>
+        <p class="landing-lede">
+            A one-tier ASP.NET Core MVC and API application for managing books,
+            member identity, borrowing rules, and loan returns in a single project.
+        </p>
+
+        <div class="landing-actions">
+            <a class="btn btn-primary btn-lg" asp-controller="Catalog" asp-action="Index">Open catalog</a>
+            @if (User.Identity?.IsAuthenticated != true)
+            {
+                <a class="btn btn-outline-dark btn-lg"
+                   asp-controller="Auth"
+                   asp-action="SignIn"
+                   asp-route-returnUrl="@(Context.Request.Path + Context.Request.QueryString)">
+                    Sign in with Google
+                </a>
+            }
+        </div>
+    </div>
+
+    <div class="landing-system-panel" aria-label="Application stack summary">
+        <div class="system-panel-header">
+            <span class="system-dot dot-green"></span>
+            <span class="system-dot dot-amber"></span>
+            <span class="system-dot dot-blue"></span>
+        </div>
+        <div class="system-panel-body">
+            <div>
+                <span class="system-label">App shape</span>
+                <strong>One ASP.NET Core project</strong>
+            </div>
+            <div>
+                <span class="system-label">Database</span>
+                <strong>SQL Server Express LocalDB</strong>
+            </div>
+            <div>
+                <span class="system-label">Auth</span>
+                <strong>Google bearer ID token APIs</strong>
+            </div>
+            <div>
+                <span class="system-label">Testing</span>
+                <strong>xUnit business-rule coverage</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="landing-checklist" aria-label="Assessment scope">
+    <div>
+        <span>Stack</span>
+        <strong>.NET 8 + C#</strong>
+    </div>
+    <div>
+        <span>UI</span>
+        <strong>MVC/Razor</strong>
+    </div>
+    <div>
+        <span>Data</span>
+        <strong>EF Core</strong>
+    </div>
+    <div>
+        <span>Security</span>
+        <strong>Google SSO</strong>
+    </div>
+</section>
+
+<section class="landing-section">
+    <div class="section-heading">
+        <p class="landing-eyebrow">Core requirements</p>
+        <h2>Built around books, members, and loans</h2>
+    </div>
+
+    <div class="feature-grid">
+        <article class="feature-card feature-books">
+            <span class="feature-kicker">Books</span>
+            <h3>Catalog and availability</h3>
+            <p>List, filter, inspect details, and calculate available copies from active loans.</p>
+        </article>
+        <article class="feature-card feature-members">
+            <span class="feature-kicker">Members</span>
+            <h3>Google-based identity</h3>
+            <p>Provision member records from validated Google claims without manual registration.</p>
+        </article>
+        <article class="feature-card feature-loans">
+            <span class="feature-kicker">Loans</span>
+            <h3>Borrowing workflow</h3>
+            <p>Borrow and return books while enforcing copy availability and active-loan limits.</p>
+        </article>
+        <article class="feature-card feature-sql">
+            <span class="feature-kicker">Deliverables</span>
+            <h3>SQL and tests</h3>
+            <p>Include schema, seed, query scripts, and xUnit checks for the main business rules.</p>
+        </article>
+    </div>
+</section>
+
+<section class="endpoint-band" aria-label="Protected member endpoints">
+    <div>
+        <p class="landing-eyebrow">Protected API surface</p>
+        <h2>Member-facing endpoints stay bearer-token only</h2>
+    </div>
+    <div class="endpoint-list">
+        <code>GET /me</code>
+        <code>GET /me/loans</code>
+        <code>POST /books/{bookId}/borrow</code>
+        <code>POST /loans/{loanId}/return</code>
+    </div>
 </section>

@@ -19,20 +19,16 @@ html {
 
 body {
   margin-bottom: 60px;
+  color: #17202a;
+  background: #f8faf9;
 }
 
-.home-panel,
 .catalog-header,
 .catalog-filter,
 .catalog-table,
 .catalog-empty,
 .book-detail {
   margin-top: 1.5rem;
-}
-
-.home-panel {
-  max-width: 720px;
-  padding-top: 2rem;
 }
 
 .catalog-header {
@@ -43,9 +39,269 @@ body {
 }
 
 .catalog-header h1,
-.book-detail h1,
-.home-panel h1 {
+.book-detail h1 {
   margin-bottom: 0.25rem;
+}
+
+.landing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 2rem;
+  align-items: center;
+  min-height: 430px;
+  padding: 4rem 0 2.5rem;
+}
+
+.landing-hero-content {
+  max-width: 740px;
+}
+
+.landing-eyebrow {
+  margin-bottom: 0.65rem;
+  color: #0f766e;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.landing-hero h1 {
+  margin-bottom: 1rem;
+  color: #111827;
+  font-size: clamp(2.45rem, 4vw, 4.6rem);
+  font-weight: 750;
+  line-height: 1;
+}
+
+.landing-lede {
+  max-width: 660px;
+  margin-bottom: 1.5rem;
+  color: #46505c;
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
+.landing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.landing-system-panel {
+  overflow: hidden;
+  border: 1px solid #d9e2df;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 18px 55px rgba(23, 32, 42, 0.1);
+}
+
+.system-panel-header {
+  display: flex;
+  gap: 0.45rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #e5ebe9;
+  background: #f0f5f3;
+}
+
+.system-dot {
+  width: 0.68rem;
+  height: 0.68rem;
+  border-radius: 999px;
+}
+
+.dot-green {
+  background: #22c55e;
+}
+
+.dot-amber {
+  background: #f59e0b;
+}
+
+.dot-blue {
+  background: #2563eb;
+}
+
+.system-panel-body {
+  display: grid;
+  gap: 1rem;
+  padding: 1.2rem;
+}
+
+.system-panel-body div {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #edf2f0;
+}
+
+.system-panel-body div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.system-label {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #64748b;
+  font-size: 0.82rem;
+}
+
+.system-panel-body strong {
+  color: #111827;
+  font-size: 1rem;
+}
+
+.landing-checklist {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  border: 1px solid #dce5e2;
+  border-radius: 8px;
+  background: #dce5e2;
+}
+
+.landing-checklist div {
+  min-height: 88px;
+  padding: 1rem;
+  background: #ffffff;
+}
+
+.landing-checklist span {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #64748b;
+  font-size: 0.84rem;
+}
+
+.landing-checklist strong {
+  color: #111827;
+  font-size: 1.04rem;
+}
+
+.landing-section {
+  margin-bottom: 3rem;
+}
+
+.section-heading {
+  max-width: 700px;
+  margin-bottom: 1.35rem;
+}
+
+.section-heading h2,
+.endpoint-band h2 {
+  margin-bottom: 0;
+  color: #111827;
+  font-size: 1.85rem;
+  line-height: 1.2;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.feature-card {
+  min-height: 205px;
+  padding: 1.15rem;
+  border: 1px solid #dce5e2;
+  border-top: 4px solid #0f766e;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.feature-card h3 {
+  margin: 0.45rem 0 0.55rem;
+  color: #111827;
+  font-size: 1.16rem;
+  line-height: 1.25;
+}
+
+.feature-card p {
+  margin-bottom: 0;
+  color: #55606c;
+  line-height: 1.55;
+}
+
+.feature-kicker {
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.feature-books {
+  border-top-color: #0f766e;
+}
+
+.feature-members {
+  border-top-color: #7c3aed;
+}
+
+.feature-loans {
+  border-top-color: #d97706;
+}
+
+.feature-sql {
+  border-top-color: #2563eb;
+}
+
+.endpoint-band {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  padding: 1.25rem;
+  border: 1px solid #dce5e2;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.endpoint-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.endpoint-list code {
+  display: block;
+  padding: 0.72rem 0.8rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #12312d;
+  background: #f6faf8;
+  font-size: 0.92rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 991.98px) {
+  .landing-hero,
+  .endpoint-band {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid,
+  .landing-checklist {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575.98px) {
+  .landing-hero {
+    min-height: auto;
+    padding-top: 2.5rem;
+  }
+
+  .landing-actions .btn {
+    width: 100%;
+  }
+
+  .feature-grid,
+  .landing-checklist {
+    grid-template-columns: 1fr;
+  }
 }
 
 .catalog-filter {
