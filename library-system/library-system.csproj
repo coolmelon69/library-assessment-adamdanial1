@@ -22,4 +22,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove=".phase*-obj\**\*.cs" />
+    <Compile Remove=".phase*-build\**\*.cs" />
+    <Content Remove=".phase*-obj\**\*" />
+    <Content Remove=".phase*-build\**\*" />
+    <None Remove=".phase*-obj\**\*" />
+    <None Remove=".phase*-build\**\*" />
+  </ItemGroup>
+
 </Project>

@@ -224,18 +224,18 @@ Goal: satisfy the assessment testing requirement with meaningful tests.
 
 Tasks:
 
-- [ ] Add xUnit test project.
-- [ ] Add tests for no-copy borrow rejection.
-- [ ] Add tests for 3-active-loan borrow rejection.
-- [ ] Add tests for first-time member provisioning.
-- [ ] Add tests for existing member reuse by Google `sub`.
-- [ ] Add tests for rejecting another member's loan return.
+- [x] Add xUnit test project.
+- [x] Add tests for no-copy borrow rejection.
+- [x] Add tests for 3-active-loan borrow rejection.
+- [x] Add tests for first-time member provisioning.
+- [x] Add tests for existing member reuse by Google `sub`.
+- [x] Add tests for rejecting another member's loan return.
 
 Acceptance Check:
 
-- [ ] `dotnet test` succeeds.
-- [ ] At least 3 non-trivial business-rule tests exist.
-- [ ] Tests cover borrowing, returning, and provisioning behavior.
+- [x] `dotnet test` succeeds.
+- [x] At least 3 non-trivial business-rule tests exist.
+- [x] Tests cover borrowing, returning, and provisioning behavior.
 
 ## Phase 11: Error Handling, Logging, And Polish
 

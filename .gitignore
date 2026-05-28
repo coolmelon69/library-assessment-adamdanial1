@@ -364,4 +364,5 @@ FodyWeavers.xsd
 /library-system/Software Developer - Coding Assessment Guidance.pdf
 /library-system/phase-verification-checklist.md
 /library-system/.superpowers/brainstorm/manual-20260526155409/state
-/library-system/library-system.Tests
+**/.phase*-build/
+**/.phase*-test-bin/
