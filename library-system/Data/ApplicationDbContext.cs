@@ -1,4 +1,5 @@
 using library_system.Models;
+using library_system.Security;
 using Microsoft.EntityFrameworkCore;
 
 namespace library_system.Data
@@ -57,6 +58,16 @@ namespace library_system.Data
                 entity.Property(member => member.Email)
                     .IsRequired()
                     .HasMaxLength(254);
+
+                entity.Property(member => member.Role)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .HasDefaultValue(AppRoles.User);
+
+                entity.ToTable(table =>
+                    table.HasCheckConstraint(
+                        "CK_Members_Role_Allowed",
+                        $"[Role] IN ('{AppRoles.User}', '{AppRoles.Admin}')"));
             });
 
             modelBuilder.Entity<Loan>(entity =>

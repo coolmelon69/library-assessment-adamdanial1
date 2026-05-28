@@ -21,13 +21,13 @@ SET IDENTITY_INSERT dbo.Books OFF;
 
 SET IDENTITY_INSERT dbo.Members ON;
 
-INSERT INTO dbo.Members (Id, SsoSubject, FullName, Email, JoinedDate)
+INSERT INTO dbo.Members (Id, SsoSubject, FullName, Email, Role, JoinedDate)
 VALUES
-    (1, N'google-sub-001', N'Aisha Tan', N'aisha@example.test', DATEADD(DAY, -90, SYSUTCDATETIME())),
-    (2, N'google-sub-002', N'Ben Lim', N'ben@example.test', DATEADD(DAY, -75, SYSUTCDATETIME())),
-    (3, N'google-sub-003', N'Chloe Wong', N'chloe@example.test', DATEADD(DAY, -60, SYSUTCDATETIME())),
-    (4, N'google-sub-004', N'Daniel Lee', N'daniel@example.test', DATEADD(DAY, -45, SYSUTCDATETIME())),
-    (5, N'google-sub-005', N'Emily Ng', N'emily@example.test', DATEADD(DAY, -30, SYSUTCDATETIME()));
+    (1, N'google-sub-001', N'Aisha Tan', N'aisha@example.test', N'User', DATEADD(DAY, -90, SYSUTCDATETIME())),
+    (2, N'google-sub-002', N'Ben Lim', N'ben@example.test', N'User', DATEADD(DAY, -75, SYSUTCDATETIME())),
+    (3, N'google-sub-003', N'Chloe Wong', N'chloe@example.test', N'User', DATEADD(DAY, -60, SYSUTCDATETIME())),
+    (4, N'google-sub-004', N'Daniel Lee', N'daniel@example.test', N'User', DATEADD(DAY, -45, SYSUTCDATETIME())),
+    (5, N'google-sub-005', N'Emily Ng', N'emily@example.test', N'User', DATEADD(DAY, -30, SYSUTCDATETIME()));
 
 SET IDENTITY_INSERT dbo.Members OFF;
 

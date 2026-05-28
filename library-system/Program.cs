@@ -1,5 +1,7 @@
 using library_system.Data;
+using library_system.Security;
 using library_system.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -17,6 +19,7 @@ builder.Services.AddScoped<IBookQueryService, BookQueryService>();
 builder.Services.AddScoped<IBookCommandService, BookCommandService>();
 builder.Services.AddScoped<IMemberProvisioningService, MemberProvisioningService>();
 builder.Services.AddScoped<ILoanService, LoanService>();
+builder.Services.AddScoped<IClaimsTransformation, MemberRoleClaimsTransformation>();
 
 builder.Services.AddAuthentication(options =>
     {
@@ -66,7 +69,11 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(AuthorizationPolicies.AdminOnly, policy =>
+        policy.RequireRole(AppRoles.Admin));
+});
 
 builder.Services.AddControllersWithViews();
 

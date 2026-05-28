@@ -34,12 +34,14 @@ CREATE TABLE dbo.Members
     SsoSubject NVARCHAR(200) NOT NULL,
     FullName NVARCHAR(150) NOT NULL,
     Email NVARCHAR(254) NOT NULL,
+    Role NVARCHAR(30) NOT NULL CONSTRAINT DF_Members_Role DEFAULT N'User',
     JoinedDate DATETIME2 NOT NULL,
 
     CONSTRAINT PK_Members PRIMARY KEY CLUSTERED (Id),
     CONSTRAINT CK_Members_SsoSubject_NotEmpty CHECK (LEN(TRIM(SsoSubject)) > 0),
     CONSTRAINT CK_Members_FullName_NotEmpty CHECK (LEN(TRIM(FullName)) > 0),
-    CONSTRAINT CK_Members_Email_NotEmpty CHECK (LEN(TRIM(Email)) > 0)
+    CONSTRAINT CK_Members_Email_NotEmpty CHECK (LEN(TRIM(Email)) > 0),
+    CONSTRAINT CK_Members_Role_Allowed CHECK (Role IN (N'User', N'Admin'))
 );
 GO
 

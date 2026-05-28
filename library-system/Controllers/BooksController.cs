@@ -1,4 +1,5 @@
 using library_system.Dtos;
+using library_system.Security;
 using library_system.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -50,7 +51,7 @@ namespace library_system.Controllers
             return Ok(book);
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = AuthorizationPolicies.AdminOnly)]
         [HttpPost]
         public async Task<ActionResult<BookDetailsResponse>> CreateBook(
             CreateBookRequest request,
@@ -67,6 +68,42 @@ namespace library_system.Controllers
                 nameof(GetBook),
                 new { id = result.Book!.Id },
                 result.Book);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = AuthorizationPolicies.AdminOnly)]
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<BookDetailsResponse>> UpdateBook(
+            int id,
+            CreateBookRequest request,
+            CancellationToken cancellationToken)
+        {
+            var result = await _bookCommandService.UpdateBookAsync(id, request, cancellationToken);
+
+            return result.Status switch
+            {
+                BookUpdateStatus.Succeeded => Ok(result.Book),
+                BookUpdateStatus.NotFound => NotFound(new { message = result.ErrorMessage }),
+                BookUpdateStatus.DuplicateIsbn => Conflict(new { message = result.ErrorMessage }),
+                BookUpdateStatus.CopiesBelowActiveLoans => Conflict(new { message = result.ErrorMessage }),
+                _ => BadRequest(new { message = "The book update could not be completed." })
+            };
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = AuthorizationPolicies.AdminOnly)]
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteBook(
+            int id,
+            CancellationToken cancellationToken)
+        {
+            var result = await _bookCommandService.DeleteBookAsync(id, cancellationToken);
+
+            return result.Status switch
+            {
+                BookDeleteStatus.Succeeded => NoContent(),
+                BookDeleteStatus.NotFound => NotFound(new { message = result.ErrorMessage }),
+                BookDeleteStatus.HasLoanHistory => Conflict(new { message = result.ErrorMessage }),
+                _ => BadRequest(new { message = "The book delete request could not be completed." })
+            };
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

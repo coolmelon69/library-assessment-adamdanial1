@@ -1,0 +1,23 @@
+@model AdminBookFormViewModel
+
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<nav class="mb-3">
+    <a asp-action="Details" asp-route-id="@Model.Id">Back to book</a>
+</nav>
+
+<h1>Edit Book</h1>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" class="row g-3">
+    <partial name="_BookForm" model="Model" />
+    <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@Model.Id">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

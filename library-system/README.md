@@ -10,6 +10,7 @@ One-tier ASP.NET Core library management system for the Software Developer codin
 - Entity Framework Core
 - SQL Server Express LocalDB
 - Google bearer ID token authentication
+- Database-backed User/Admin roles
 - xUnit tests
 
 ## Current Status
@@ -35,7 +36,7 @@ Default local database target:
 }
 ```
 
-## Authentication
+## Authentication And Authorization
 
 Member-facing endpoints will use Google bearer ID token authentication.
 
@@ -47,14 +48,33 @@ Authorization: Bearer <google-id-token>
 
 Google client configuration will use placeholders only. Real secrets must not be committed.
 
-## Planned Protected Endpoints
+Members are provisioned from Google claims on first authenticated `/me` access. New members default to the `User` role.
+
+Admin access is stored on the `Members.Role` column. To promote the first admin, sign in once with Google so the member row exists, then run:
+
+```sql
+UPDATE dbo.Members
+SET Role = N'Admin'
+WHERE Email = N'<admin-email>';
+```
+
+Chosen book authorization policy:
+
+- Public: `GET /books`, `GET /books/{id}`, and the public catalog UI.
+- Any authenticated user: `/me`, `/me/loans`, borrow, and return own loans.
+- Admin only: book create, update, delete, and `/admin/books` management screens.
+
+## Protected Endpoints
 
 - `GET /me`
 - `GET /me/loans`
 - `POST /books/{bookId}/borrow`
 - `POST /loans/{loanId}/return`
+- `POST /books` requires Admin
+- `PUT /books/{id}` requires Admin
+- `DELETE /books/{id}` requires Admin
 
-## Planned Public Endpoints
+## Public Endpoints
 
 - `GET /books`
 - `GET /books/{id}`
@@ -97,5 +117,6 @@ dotnet test ".\XUnit Test for Library System\XUnit Test for Library System.cspro
 
 - This is a one-tier application: no separate frontend or backend project.
 - Book list and book detail endpoints are public.
-- Book creation, member profile, and loan actions require authentication.
+- Book creation, update, and delete require the Admin role.
+- Member profile and loan actions require authentication.
 - SQL scripts will be added under `/sql` in a later phase.

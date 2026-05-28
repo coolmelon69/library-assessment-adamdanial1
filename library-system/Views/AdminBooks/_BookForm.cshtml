@@ -1,0 +1,34 @@
+@model AdminBookFormViewModel
+
+<input asp-for="Id" type="hidden" />
+<div asp-validation-summary="ModelOnly" class="text-danger col-12"></div>
+
+<div class="col-12 col-md-6">
+    <label asp-for="Title" class="form-label"></label>
+    <input asp-for="Title" class="form-control" autocomplete="off" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+</div>
+
+<div class="col-12 col-md-6">
+    <label asp-for="Author" class="form-label"></label>
+    <input asp-for="Author" class="form-control" autocomplete="off" />
+    <span asp-validation-for="Author" class="text-danger"></span>
+</div>
+
+<div class="col-12 col-md-6">
+    <label asp-for="ISBN" class="form-label"></label>
+    <input asp-for="ISBN" class="form-control" autocomplete="off" />
+    <span asp-validation-for="ISBN" class="text-danger"></span>
+</div>
+
+<div class="col-12 col-md-3">
+    <label asp-for="PublishedYear" class="form-label"></label>
+    <input asp-for="PublishedYear" class="form-control" />
+    <span asp-validation-for="PublishedYear" class="text-danger"></span>
+</div>
+
+<div class="col-12 col-md-3">
+    <label asp-for="TotalCopies" class="form-label"></label>
+    <input asp-for="TotalCopies" class="form-control" />
+    <span asp-validation-for="TotalCopies" class="text-danger"></span>
+</div>

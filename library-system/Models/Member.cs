@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using library_system.Security;
 
 namespace library_system.Models
 {
@@ -18,6 +19,10 @@ namespace library_system.Models
         [EmailAddress]
         [StringLength(254)]
         public string Email { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(30)]
+        public string Role { get; set; } = AppRoles.User;
 
         public DateTime JoinedDate { get; set; }
 

@@ -25,10 +25,13 @@
   <ItemGroup>
     <Compile Remove=".phase*-obj\**\*.cs" />
     <Compile Remove=".phase*-build\**\*.cs" />
+    <Compile Remove=".phase*-test-bin\**\*.cs" />
     <Content Remove=".phase*-obj\**\*" />
     <Content Remove=".phase*-build\**\*" />
+    <Content Remove=".phase*-test-bin\**\*" />
     <None Remove=".phase*-obj\**\*" />
     <None Remove=".phase*-build\**\*" />
+    <None Remove=".phase*-test-bin\**\*" />
   </ItemGroup>
 
 </Project>

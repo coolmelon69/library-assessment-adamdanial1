@@ -4,5 +4,6 @@ namespace library_system.Dtos
         int Id,
         string FullName,
         string Email,
+        string Role,
         DateTime JoinedDate);
 }

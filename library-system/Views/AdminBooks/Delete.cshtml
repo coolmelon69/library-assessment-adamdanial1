@@ -1,0 +1,29 @@
+@model BookDetailsResponse
+
+@{
+    ViewData["Title"] = "Delete Book";
+}
+
+<nav class="mb-3">
+    <a asp-action="Details" asp-route-id="@Model.Id">Back to book</a>
+</nav>
+
+<h1>Delete Book</h1>
+
+<div class="alert alert-warning" role="alert">
+    Delete is allowed only when the book has no loan history.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Title</dt>
+    <dd class="col-sm-9">@Model.Title</dd>
+    <dt class="col-sm-3">Author</dt>
+    <dd class="col-sm-9">@Model.Author</dd>
+    <dt class="col-sm-3">ISBN</dt>
+    <dd class="col-sm-9">@Model.ISBN</dd>
+</dl>
+
+<form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post" class="d-flex gap-2">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@Model.Id">Cancel</a>
+</form>
