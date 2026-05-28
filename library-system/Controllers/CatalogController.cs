@@ -1,4 +1,5 @@
-using library_system.Services;
+using library_system.Services.Books;
+using library_system.Services.Loans;
 using library_system.ViewModels;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;

@@ -5,7 +5,7 @@ using library_system.Models;
 using library_system.Security;
 using Microsoft.EntityFrameworkCore;
 
-namespace library_system.Services
+namespace library_system.Services.Members
 {
     public class MemberProvisioningService : IMemberProvisioningService
     {

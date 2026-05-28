@@ -1,6 +1,7 @@
 using library_system.Dtos;
 using library_system.Security;
-using library_system.Services;
+using library_system.Services.Books;
+using library_system.Services.Loans;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

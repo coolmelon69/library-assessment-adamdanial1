@@ -2,7 +2,7 @@ using library_system.Data;
 using library_system.Dtos;
 using Microsoft.EntityFrameworkCore;
 
-namespace library_system.Services
+namespace library_system.Services.Books
 {
     public class BookQueryService : IBookQueryService
     {

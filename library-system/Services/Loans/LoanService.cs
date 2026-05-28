@@ -2,9 +2,10 @@ using System.Security.Claims;
 using library_system.Data;
 using library_system.Dtos;
 using library_system.Models;
+using library_system.Services.Members;
 using Microsoft.EntityFrameworkCore;
 
-namespace library_system.Services
+namespace library_system.Services.Loans
 {
     public class LoanService : ILoanService
     {

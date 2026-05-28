@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace library_system.Services
+namespace library_system.Services.Members
 {
     public interface IMemberProvisioningService
     {

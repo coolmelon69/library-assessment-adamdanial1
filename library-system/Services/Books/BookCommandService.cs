@@ -3,7 +3,7 @@ using library_system.Dtos;
 using library_system.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace library_system.Services
+namespace library_system.Services.Books
 {
     public class BookCommandService : IBookCommandService
     {

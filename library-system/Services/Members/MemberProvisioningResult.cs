@@ -1,6 +1,6 @@
 using library_system.Dtos;
 
-namespace library_system.Services
+namespace library_system.Services.Members
 {
     public record MemberProvisioningResult(
         bool Succeeded,

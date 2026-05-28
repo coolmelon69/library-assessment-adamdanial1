@@ -1,7 +1,8 @@
 using System.Security.Claims;
 using library_system.Data;
 using library_system.Models;
-using library_system.Services;
+using library_system.Services.Loans;
+using library_system.Services.Members;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Abstractions;
 

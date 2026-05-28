@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using library_system.Dtos;
 
-namespace library_system.Services
+namespace library_system.Services.Loans
 {
     public interface ILoanService
     {

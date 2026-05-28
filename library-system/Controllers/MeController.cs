@@ -1,5 +1,6 @@
 using System.Security.Claims;
-using library_system.Services;
+using library_system.Services.Loans;
+using library_system.Services.Members;
 using library_system.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
