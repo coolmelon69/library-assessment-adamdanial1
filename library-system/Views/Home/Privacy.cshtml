@@ -1,6 +1,53 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+@{
+    ViewData["Title"] = "Project Notes";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<section class="landing-section">
+    <div class="section-heading">
+        <p class="landing-eyebrow">Submission details</p>
+        <h1>@ViewData["Title"]</h1>
+        <p class="landing-lede">
+            This page keeps a small amount of reviewer-friendly context about the Library System assessment.
+        </p>
+    </div>
+
+    <div class="status-grid">
+        <div>
+            <span>Candidate</span>
+            <strong>Muhammad Adam Danial</strong>
+        </div>
+        <div>
+            <span>Application</span>
+            <strong>Library borrowing and catalog management system</strong>
+        </div>
+        <div>
+            <span>Stack</span>
+            <strong>.NET 8, ASP.NET Core MVC, EF Core, LocalDB</strong>
+        </div>
+        <div>
+            <span>Authentication</span>
+            <strong>Google sign-in for browser flow and bearer-token APIs</strong>
+        </div>
+        <div>
+            <span>Testing</span>
+            <strong>xUnit coverage for member provisioning and loan rules</strong>
+        </div>
+        <div>
+            <span>Data</span>
+            <strong>SQL schema, seed data, and assessment query scripts included</strong>
+        </div>
+    </div>
+</section>
+
+<section class="endpoint-band" aria-label="Privacy and data notes">
+    <div>
+        <p class="landing-eyebrow">Data notes</p>
+        <h2>What this demo stores</h2>
+    </div>
+    <div class="endpoint-list">
+        <code>Book records: title, author, ISBN, published year, total copies</code>
+        <code>Member records: Google subject, name, email, and role</code>
+        <code>Loan records: borrowed date, returned date, member, and book</code>
+        <code>No passwords are stored by this application</code>
+    </div>
+</section>

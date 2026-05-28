@@ -7,21 +7,31 @@
 <section class="catalog-header">
     <div>
         <h1>Library Catalog</h1>
-        <p class="text-muted mb-0">@Model.Books.Count book@(Model.Books.Count == 1 ? "" : "s") found</p>
+        <p class="text-muted mb-0">Search and review public book availability.</p>
     </div>
+    <span class="catalog-count">@Model.Books.Count book@(Model.Books.Count == 1 ? "" : "s") found</span>
 </section>
 
-<form method="get" asp-controller="Catalog" asp-action="Index" class="catalog-filter row g-3 align-items-end">
+<form method="get" asp-controller="Catalog" asp-action="Index" class="catalog-filter catalog-filter-panel row g-3 align-items-end">
     <div class="col-12 col-md-5">
-        <label asp-for="Title" class="form-label">Title</label>
-        <input asp-for="Title" class="form-control" autocomplete="off" />
+        <label asp-for="Title" class="form-label">
+            <i class="fa-solid fa-book catalog-label-icon catalog-label-title" aria-hidden="true"></i>
+            Title
+        </label>
+        <input asp-for="Title" class="form-control" autocomplete="off" placeholder="Search by title" />
     </div>
     <div class="col-12 col-md-5">
-        <label asp-for="Author" class="form-label">Author</label>
-        <input asp-for="Author" class="form-control" autocomplete="off" />
+        <label asp-for="Author" class="form-label">
+            <i class="fa-solid fa-user-pen catalog-label-icon catalog-label-author" aria-hidden="true"></i>
+            Author
+        </label>
+        <input asp-for="Author" class="form-control" autocomplete="off" placeholder="Search by author" />
     </div>
     <div class="col-12 col-md-2 d-grid">
-        <button type="submit" class="btn btn-primary">Filter</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-filter me-1" aria-hidden="true"></i>
+            Filter
+        </button>
     </div>
 </form>
 
@@ -33,8 +43,19 @@
 }
 else
 {
+    <div class="catalog-list-heading">
+        <div>
+            <h2>Book list</h2>
+            <p class="text-muted mb-0">Availability is highlighted in the status column.</p>
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Model.Title) || !string.IsNullOrWhiteSpace(Model.Author))
+        {
+            <a asp-controller="Catalog" asp-action="Index" class="btn btn-outline-secondary btn-sm">Clear filters</a>
+        }
+    </div>
+
     <div class="table-responsive catalog-table">
-        <table class="table table-hover align-middle">
+        <table class="table table-hover align-middle catalog-books-table">
             <thead>
                 <tr>
                     <th scope="col">Title</th>
@@ -42,21 +63,42 @@ else
                     <th scope="col">ISBN</th>
                     <th scope="col">Year</th>
                     <th scope="col">Copies</th>
-                    <th scope="col">Available</th>
+                    <th scope="col">Status</th>
                 </tr>
             </thead>
             <tbody>
             @foreach (var book in Model.Books)
             {
-                <tr>
-                    <td>
+                var statusClass = book.AvailableCopies == 0
+                    ? "catalog-status-unavailable"
+                    : book.AvailableCopies == 1 ? "catalog-status-low" : "catalog-status-available";
+
+                var statusText = book.AvailableCopies == 0
+                    ? "Unavailable"
+                    : book.AvailableCopies == 1 ? "Low stock" : "Available";
+
+                var statusIcon = book.AvailableCopies == 0
+                    ? "fa-circle-xmark"
+                    : book.AvailableCopies == 1 ? "fa-triangle-exclamation" : "fa-circle-check";
+
+                <tr class="@statusClass">
+                    <td class="catalog-title-cell">
+                        <i class="fa-solid fa-book catalog-book-icon" aria-hidden="true"></i>
                         <a asp-controller="Catalog" asp-action="Details" asp-route-id="@book.Id">@book.Title</a>
                     </td>
                     <td>@book.Author</td>
                     <td><span class="text-nowrap">@book.ISBN</span></td>
                     <td>@book.PublishedYear</td>
                     <td>@book.TotalCopies</td>
-                    <td>@book.AvailableCopies</td>
+                    <td>
+                        <span class="catalog-status-badge">
+                            <i class="fa-solid @statusIcon" aria-hidden="true"></i>
+                            @statusText
+                        </span>
+                        <span class="catalog-copy-note">
+                            @book.AvailableCopies of @book.TotalCopies available
+                        </span>
+                    </td>
                 </tr>
             }
             </tbody>

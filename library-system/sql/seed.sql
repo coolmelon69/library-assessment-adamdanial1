@@ -1,5 +1,14 @@
 -- Library System assessment seed data.
--- Run after schema.sql.
+-- Run after EF migrations or after schema.sql.
+-- Safe to rerun: it replaces the sample Books, Members, and Loans.
+
+DELETE FROM dbo.Loans;
+DELETE FROM dbo.Members;
+DELETE FROM dbo.Books;
+
+DBCC CHECKIDENT ('dbo.Loans', RESEED, 0);
+DBCC CHECKIDENT ('dbo.Members', RESEED, 0);
+DBCC CHECKIDENT ('dbo.Books', RESEED, 0);
 
 SET IDENTITY_INSERT dbo.Books ON;
 
