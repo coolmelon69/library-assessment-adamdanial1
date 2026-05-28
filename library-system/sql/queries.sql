@@ -1,5 +1,4 @@
 -- Library System assessment queries.
--- Run after schema.sql and seed.sql, or against an equivalent database.
 
 -- 1. Top 5 most-borrowed books of all time.
 SELECT TOP (5)
@@ -47,7 +46,7 @@ MonthWindow AS
     FROM MonthNumbers
 )
 SELECT
-    mw.MonthStart,
+    CONVERT(char(7), mw.MonthStart, 120) AS MonthStart,
     COUNT(l.Id) AS LoanCount
 FROM MonthWindow AS mw
 LEFT JOIN dbo.Loans AS l
@@ -65,8 +64,7 @@ SELECT
     b.ISBN
 FROM dbo.Books AS b
 LEFT JOIN dbo.Loans AS l ON l.BookId = b.Id
-WHERE l.Id IS NULL
-ORDER BY b.Title ASC;
+WHERE l.Id IS NULL ORDER BY b.Title ASC;
 
 -- 5. Member with the longest single returned-loan duration.
 SELECT TOP (1)

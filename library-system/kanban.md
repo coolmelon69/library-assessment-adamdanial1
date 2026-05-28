@@ -243,23 +243,23 @@ Goal: make API behavior clear and reviewer-friendly.
 
 Tasks:
 
-- [ ] Review `400 Bad Request` responses.
-- [ ] Review `401 Unauthorized` responses.
-- [ ] Review `403 Forbidden` responses.
-- [ ] Review `404 Not Found` responses.
-- [ ] Add `ILogger` logging for member provisioning.
-- [ ] Add `ILogger` logging for book borrowing.
-- [ ] Add `ILogger` logging for loan returns.
-- [ ] Add `ILogger` logging for rejected business-rule actions.
-- [ ] Remove dead or unused code.
+- [x] Review `400 Bad Request` responses.
+- [x] Review `401 Unauthorized` responses.
+- [x] Review `403 Forbidden` responses.
+- [x] Review `404 Not Found` responses.
+- [x] Add `ILogger` logging for member provisioning.
+- [x] Add `ILogger` logging for book borrowing.
+- [x] Add `ILogger` logging for loan returns.
+- [x] Add `ILogger` logging for rejected business-rule actions.
+- [x] Remove dead or unused code.
 
 Acceptance Check:
 
-- [ ] API failures return understandable messages.
-- [ ] Normal failures do not expose stack traces.
-- [ ] Logs cover key flows.
-- [ ] `dotnet build` succeeds.
-- [ ] `dotnet test` succeeds.
+- [x] API failures return understandable messages.
+- [x] Normal failures do not expose stack traces.
+- [x] Logs cover key flows.
+- [x] `dotnet build` succeeds.
+- [x] `dotnet test` succeeds.
 
 ## Phase 12: README And Final Submission Prep
 

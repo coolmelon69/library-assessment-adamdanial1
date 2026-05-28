@@ -31,6 +31,8 @@ namespace library_system.Services
                 || string.IsNullOrWhiteSpace(fullName)
                 || string.IsNullOrWhiteSpace(email))
             {
+                _logger.LogWarning("Member provisioning failed because required Google claims were missing.");
+
                 return MemberProvisioningResult.MissingClaims();
             }
 
@@ -51,6 +53,10 @@ namespace library_system.Services
                 await _context.SaveChangesAsync(cancellationToken);
 
                 _logger.LogInformation("Provisioned member {MemberId} from Google subject {SsoSubject}.", member.Id, ssoSubject);
+            }
+            else
+            {
+                _logger.LogDebug("Resolved existing member {MemberId} from Google subject {SsoSubject}.", member.Id, ssoSubject);
             }
 
             return MemberProvisioningResult.Success(new MemberProfileResponse(
