@@ -1,0 +1,97 @@
+@model MeProfileViewModel
+
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<section class="account-header">
+    <div>
+        <p class="landing-eyebrow">Member profile</p>
+        <h1>My Profile</h1>
+        <p class="text-muted mb-0">Google-authenticated member details and active borrowing summary.</p>
+    </div>
+    <a class="btn btn-primary" asp-controller="Me" asp-action="GetMyActiveLoans">View my loans</a>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <div class="alert alert-warning" role="alert">@Model.ErrorMessage</div>
+}
+
+<section class="account-dashboard">
+    <article class="account-panel account-profile-panel">
+        <p class="borrow-eyebrow">Profile</p>
+        @if (Model.Member is null)
+        {
+            <p class="text-muted mb-0">Your member profile could not be loaded.</p>
+        }
+        else
+        {
+            <dl class="account-detail-list">
+                <div>
+                    <dt>Name</dt>
+                    <dd>@Model.Member.FullName</dd>
+                </div>
+                <div>
+                    <dt>Email</dt>
+                    <dd>@Model.Member.Email</dd>
+                </div>
+                <div>
+                    <dt>Joined</dt>
+                    <dd>@Model.Member.JoinedDate.ToString("yyyy-MM-dd")</dd>
+                </div>
+            </dl>
+        }
+    </article>
+
+    <article class="account-panel account-summary-panel">
+        <p class="borrow-eyebrow">Loan summary</p>
+        <div class="account-metrics">
+            <div>
+                <span>Active loans</span>
+                <strong>@Model.ActiveLoans.Count</strong>
+            </div>
+            <div>
+                <span>Loan limit</span>
+                <strong>@Model.ActiveLoanLimit</strong>
+            </div>
+            <div>
+                <span>Remaining</span>
+                <strong>@Math.Max(0, Model.ActiveLoanLimit - Model.ActiveLoans.Count)</strong>
+            </div>
+        </div>
+        <p class="text-muted mb-0">
+            Members can keep up to @Model.ActiveLoanLimit active loans at a time.
+        </p>
+    </article>
+</section>
+
+<section class="account-panel">
+    <div class="account-section-heading">
+        <div>
+            <p class="borrow-eyebrow">Current loans</p>
+            <h2>Active loans</h2>
+        </div>
+        <a asp-controller="Catalog" asp-action="Index">Browse catalog</a>
+    </div>
+
+    @if (Model.ActiveLoans.Count == 0)
+    {
+        <div class="account-empty">
+            You do not have any active loans.
+        </div>
+    }
+    else
+    {
+        <div class="loan-card-grid">
+            @foreach (var loan in Model.ActiveLoans)
+            {
+                <article class="loan-card">
+                    <h3>@loan.BookTitle</h3>
+                    <p>@loan.BookAuthor</p>
+                    <span>Borrowed @loan.BorrowedDate.ToString("yyyy-MM-dd")</span>
+                </article>
+            }
+        </div>
+    }
+</section>
